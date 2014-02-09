@@ -10,23 +10,23 @@ function head() {
 <html>
     </head>
         <title>Silly Sentences</title>
-        <link type="text/css" rel="stylesheet" href="/wordgame/styles.css" />
+        <link type="text/css" rel="stylesheet" href="/styles.css" />
     </head>
     <body>
         
         <div id="cols"">
             <!---->
-            <h1><a href="/wordgame/"><img class="banner" src="/wordgame/banner.png" alt="Silly Sentences" /></a></h1>
+            <h1><a href="/"><img class="banner" src="/banner.png" alt="Silly Sentences" /></a></h1>
             <div id="leftbar">
                 <div id="newgames">
                     <h3> Recent creations </h3>
                     <ul class="gamelist">
                         <?php foreach ($stories as $story) { ?>
-                        <li> <a href="/wordgame/play/<?= $story->get_url(); ?>"><?= $story->safename(); ?></a> </li>
+                        <li> <a href="/play/<?= $story->get_url(); ?>"><?= $story->safename(); ?></a> </li>
                         <?php } ?>
                     </ul>
                 </div>
-                <div><a href="/wordgame/create.php">Create your own</a></div>
+                <div><a href="/create.php">Create your own</a></div>
 
             </div>
             <div id="mainbox"> 

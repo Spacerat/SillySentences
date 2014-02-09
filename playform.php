@@ -10,7 +10,7 @@ if (isset($_GET['story'])) {
 
 <h2> <?= $story->safename(); ?></h2>
 <span id="author">by <?= $story->author ?></span>
-<form method="GET" action="/wordgame/result.php">
+<form method="GET" action="/result.php">
 <ul class="entrylist">
         <?php
         $words = $story->get_words();
