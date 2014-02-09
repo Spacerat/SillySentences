@@ -22,12 +22,17 @@ class Story extends dbItem{
     public static function get_by_name($name, $exceptions = true) {
         $name = pg_escape_string($name);
         $table = Story::$table;
-        $results = pg_query("SELECT * FROM $table WHERE name='$name' LIMIT 1") or die(mysql_error());
+        $results = pg_query("SELECT * FROM $table WHERE name='$name' LIMIT 1") or die(pg_last_error());
 
         $list = Story::from_result_list($results, "Story");
-        if ((!isset($list[0]) || !$list[0]) && ($exceptions === true)) {
-            $n = htmlentities($name);
-            throw new StoryNotFoundException("A story with the name <em>$n</em> does not exist.");
+        if ((!isset($list[0]) || !$list[0]) {
+            if ($exceptions === true) {
+                $n = htmlentities($name);
+                throw new StoryNotFoundException("A story with the name <em>$n</em> does not exist.");
+            }
+            else {
+                return NULL;
+            }
         }
         return $list[0];
     }
@@ -101,7 +106,7 @@ class Story extends dbItem{
 
         $table = Story::$table;
         $str = "INSERT INTO $table (name, content, author, fields, password) VALUES ('$name', '$content', '$author', $numfields, '$hash')";
-        $result = pg_query($str) or die(mysql_error());
+        $result = pg_query($str) or die(pg_last_error());
     }
 
     public function delete($password) {
@@ -110,7 +115,7 @@ class Story extends dbItem{
         $name = pg_escape_string($this->name);
         if ($hash == $this->password) {
             $hash = pg_escape_string($hash);
-            $result = pg_query("DELETE FROM $table WHERE name='$name' AND password='$hash'") or die(mysql_error());
+            $result = pg_query("DELETE FROM $table WHERE name='$name' AND password='$hash'") or die(pg_last_error());
             return $result;
         }
         else {
