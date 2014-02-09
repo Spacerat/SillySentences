@@ -24,7 +24,7 @@ function head() {
                     <h3> Recent creations </h3>
                     <ul class="gamelist">
                         <?php foreach ($stories as $story) { ?>
-                        <li> <a href="/play/<?= $story->get_url(); ?>"><?= $story->safename(); ?></a> </li>
+                        <li> <a href="/play.php?story=<?= $story->get_url(); ?>"><?= $story->safename(); ?></a> </li>
                         <?php } ?>
                     </ul>
                 </div>

@@ -11,7 +11,7 @@ class StoryNotFoundException extends StoryException{}
  */
 class Story extends dbItem{
     private static $table = "games";
-    public static $subbed;
+    public $subbed;
     public static function get_all() {
         $table = Story::$table;
         $results = pg_query("SELECT * FROM $table");
@@ -22,14 +22,14 @@ class Story extends dbItem{
     public static function get_by_name($name, $exceptions = true) {
         $name = pg_escape_string($name);
         $table = Story::$table;
-        $results = pg_query("SELECT * FROM $table WHERE name='$name'") or die(mysql_error());
+        $results = pg_query("SELECT * FROM $table WHERE name='$name' LIMIT 1") or die(mysql_error());
 
         $list = Story::from_result_list($results, "Story");
-        if (!$list[0] && ($exceptions === true)) {
+        if (!$list && ($exceptions === true)) {
             $n = htmlentities($name);
             throw new StoryNotFoundException("A story with the name <em>$n</em> does not exist.");
         }
-        return $list[0];
+        return $list;
     }
     public static function get_by_urlname($url) {
         return Story::get_by_name(Story::url_to_name($url));
