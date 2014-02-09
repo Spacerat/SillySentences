@@ -1,8 +1,8 @@
 <?php
 class db {
-    public static function get_connection($url='mysql.spacerat.meteornet.net',$username='spacerat',$pwd='abc123', $db='spacerat') {
-        $conn = mysql_connect( $url,$username,$pwd);
-        mysql_select_db($db);
+    public static function get_connection($url='172.17.42.1',$username='root',$pwd='ktEguYY1ma5Yb5i1', $db='db') {
+        $conn = pg_connect("dbname=$db host=$url port=49165 user=root password=$pwd");
+        //pg_select_db($db);
         return $conn;
     }
 }
