@@ -14,7 +14,7 @@ class Story extends dbItem{
     public static $subbed;
     public static function get_all() {
         $table = Story::$table;
-        $results = pg_query("SELECT * FROM `$table`");
+        $results = pg_query("SELECT * FROM $table");
         $list = Story::from_result_list($results, "Story");
         return $list;
     }
@@ -22,7 +22,7 @@ class Story extends dbItem{
     public static function get_by_name($name, $exceptions = true) {
         $name = pg_escape_string($name);
         $table = Story::$table;
-        $results = pg_query("SELECT * FROM `$table` WHERE name='$name'") or die(mysql_error());
+        $results = pg_query("SELECT * FROM $table WHERE name='$name'") or die(mysql_error());
 
         $list = Story::from_result_list($results, "Story");
         if (!$list[0] && ($exceptions === true)) {
@@ -110,7 +110,7 @@ class Story extends dbItem{
         $name = pg_escape_string($this->name);
         if ($hash == $this->password) {
             $hash = pg_escape_string($hash);
-            $result = pg_query("DELETE FROM $table WHERE `name`='$name' AND `password`='$hash'") or die(mysql_error());
+            $result = pg_query("DELETE FROM $table WHERE name='$name' AND password='$hash'") or die(mysql_error());
             return $result;
         }
         else {
