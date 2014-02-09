@@ -10,7 +10,7 @@ class StoryNotFoundException extends StoryException{}
  * A story item.
  */
 class Story extends dbItem{
-    private static $table = "wordgame_games";
+    private static $table = "games";
     public static $subbed;
     public static function get_all() {
         $table = Story::$table;

@@ -12,7 +12,7 @@ class db {
 
     public static function init() {
         pg_query("
-        CREATE TABLE COMPANY( 
+        CREATE TABLE games( 
            ID          INT PRIMARY KEY  NOT NULL,
            name        CHAR(50) UNIQUE  NOT NULL,
            content     TEXT             NOT NULL,
