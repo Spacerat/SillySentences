@@ -25,7 +25,7 @@ class Story extends dbItem{
         $results = pg_query("SELECT * FROM $table WHERE name='$name' LIMIT 1") or die(pg_last_error());
 
         $list = Story::from_result_list($results, "Story");
-        if ((!isset($list[0]) || !$list[0]) {
+        if (!isset($list[0]) || !$list[0]) {
             if ($exceptions === true) {
                 $n = htmlentities($name);
                 throw new StoryNotFoundException("A story with the name <em>$n</em> does not exist.");
