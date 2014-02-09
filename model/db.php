@@ -11,9 +11,10 @@ class db {
 
 
     public static function init() {
+        pg_query("DROP TABLE games;")
         pg_query("
         CREATE TABLE games( 
-           ID          INT PRIMARY KEY  NOT NULL,
+           ID          SERIAL PRIMARY KEY  NOT NULL,
            name        CHAR(50) UNIQUE  NOT NULL,
            content     TEXT             NOT NULL,
            author      CHAR(50)         NOT NULL,
