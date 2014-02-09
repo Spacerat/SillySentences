@@ -10,7 +10,7 @@ class db {
     }
 
 
-    public statif function init() {
+    public static function init() {
         pg_query("
         CREATE TABLE COMPANY( 
            ID          INT PRIMARY KEY  NOT NULL,
