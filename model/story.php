@@ -25,11 +25,11 @@ class Story extends dbItem{
         $results = pg_query("SELECT * FROM $table WHERE name='$name' LIMIT 1") or die(mysql_error());
 
         $list = Story::from_result_list($results, "Story");
-        if (!$list && ($exceptions === true)) {
+        if (!$list[0] && ($exceptions === true)) {
             $n = htmlentities($name);
             throw new StoryNotFoundException("A story with the name <em>$n</em> does not exist.");
         }
-        return $list;
+        return $list[0];
     }
     public static function get_by_urlname($url) {
         return Story::get_by_name(Story::url_to_name($url));
