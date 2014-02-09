@@ -1,10 +1,13 @@
 <?php
+include_once('model/story.php');
+
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
 error_reporting(-1);
+
 db::get_connection();
 
-include_once('model/story.php');
+
 function head() { 
     
     $stories = Story::get_all();
