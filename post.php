@@ -6,7 +6,7 @@ $author = $_POST['author'];
 $content = $_POST['content'];
 $password = $_POST['password'];
 
-head();
+
 
 try {
     if (!$name) {
@@ -25,6 +25,10 @@ try {
     $result = Story::post_new($name, $content, $author, $password);
     $url = Story::name_to_url($name);
     ?>
+
+
+    head();
+
     <h2> Post successful </h2>
     <p>See your new story <a href="/play.php?story=<?= $url ?>">here</a>.</p>
     <?php
