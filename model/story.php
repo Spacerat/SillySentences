@@ -96,7 +96,9 @@ class Story extends dbItem{
         }
         $hash = '';
         if ($password !== "") {
+            
             $hash =  pg_escape_string(sha1(sha1($password).$name));
+            echo "sha1(sha1($password)+$name) = $hash<br>";
         }
 
         $name = pg_escape_string($name);
