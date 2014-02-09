@@ -113,6 +113,8 @@ class Story extends dbItem{
         $table = Story::$table;
         $hash = sha1(sha1($password).$this->name);
         $name = pg_escape_string($this->name);
+        echo $hash;
+        echo $this->password;
         if ($hash == $this->password) {
             $hash = pg_escape_string($hash);
             $result = pg_query("DELETE FROM $table WHERE name='$name' AND password='$hash'") or die(pg_last_error());
