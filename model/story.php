@@ -52,7 +52,7 @@ class Story extends dbItem{
         $repeats = Array();
         $this->subbed = preg_replace_callback('|\[(\((.*?)\))?(.*?)\]|', function($match) use ($array, &$repeats, &$i) {
             $val = "";
-            if (trim($array[$i+1]) === "") {
+            if (!isset($array[$i+1]) || trim($array[$i+1]) === "") {
                 $val = htmlspecialchars($match[0]);
             }
             else {
@@ -61,7 +61,7 @@ class Story extends dbItem{
 
             if ($match[1]!=="") {
             	$key = trim($match[1]);
-        		if ($repeats[$key] != null) {
+        		if (isset($repeats[$key]) && $repeats[$key] != null) {
         			return "<span class=\"word\"> ".$repeats[$key]."</span>";
         		}
             	else {
