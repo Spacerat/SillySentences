@@ -1,7 +1,6 @@
 <?php
 
 include_once('common.php');
-db::get_connection();
 $name = $_POST['name'];
 $author = $_POST['author'];
 $content = $_POST['content'];
