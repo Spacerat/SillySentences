@@ -24,10 +24,12 @@ try {
 
     $result = Story::post_new($name, $content, $author, $password);
     $url = Story::name_to_url($name);
+
+    head();
     ?>
 
 
-    head();
+
 
     <h2> Post successful </h2>
     <p>See your new story <a href="/play.php?story=<?= $url ?>">here</a>.</p>
