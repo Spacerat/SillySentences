@@ -3,9 +3,28 @@ class db {
     public static function get_connection($url='172.17.42.1',$username='root',$pwd='ktEguYY1ma5Yb5i1', $db='db') {
         $conn = pg_connect("dbname=$db host=$url port=49165 user=root password=$pwd");
         //pg_select_db($db);
+
+
+
         return $conn;
     }
+
+
+    public statif function init() {
+        pg_query("
+        CREATE TABLE COMPANY( 
+           ID          INT PRIMARY KEY  NOT NULL,
+           name        CHAR(50) UNIQUE  NOT NULL,
+           content     TEXT             NOT NULL,
+           author      CHAR(50)         NOT NULL,
+           fields      INT              NOT NULL,  
+           password    TEXT             NOT NULL
+        );");
+    }
+
 }
+
+
 
 class dbItem {
     protected $data;
@@ -26,13 +45,13 @@ class dbItem {
 
     protected static function from_result_list($results, $classname) {
         if (!$results){return False;}
-        $n = mysql_num_rows($results);
-        $obj = mysql_fetch_object($results);
+        $n = pg_num_rows($results);
+        $obj = pg_fetch_object($results);
         $arr = Array();
         while ($obj) {
             $q = new $classname($obj);
             $arr[] = $q;
-            $obj = mysql_fetch_object($results);
+            $obj = pg_fetch_object($results);
         }
         return $arr;
     }

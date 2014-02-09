@@ -5,6 +5,11 @@ error_reporting(-1);
 
 include_once('common.php');
 head();
+
+if (isset($_GET['initdb'])) {
+	db::init();
+}
+
 $_GET['story'] = 'Example';
 ?>
 <h2> Welcome</h2>
