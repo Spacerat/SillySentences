@@ -14,15 +14,15 @@ class Story extends dbItem{
     public static $subbed;
     public static function get_all() {
         $table = Story::$table;
-        $results = mysql_query("SELECT * FROM `$table`");
+        $results = pg_query("SELECT * FROM `$table`");
         $list = Story::from_result_list($results, "Story");
         return $list;
     }
 
     public static function get_by_name($name, $exceptions = true) {
-        $name = mysql_real_escape_string($name);
+        $name = pg_escape_string($name);
         $table = Story::$table;
-        $results = mysql_query("SELECT * FROM `$table` WHERE name='$name'") or die(mysql_error());
+        $results = pg_query("SELECT * FROM `$table` WHERE name='$name'") or die(mysql_error());
 
         $list = Story::from_result_list($results, "Story");
         if (!$list[0] && ($exceptions === true)) {
@@ -91,26 +91,26 @@ class Story extends dbItem{
         }
         $hash = '';
         if ($password !== "") {
-            $hash =  mysql_real_escape_string(sha1(sha1($password).$name));
+            $hash =  pg_escape_string(sha1(sha1($password).$name));
         }
 
-        $name = mysql_real_escape_string($name);
-        $author = mysql_real_escape_string(htmlentities($author));
-        $content = mysql_real_escape_string($content);
+        $name = pg_escape_string($name);
+        $author = pg_escape_string(htmlentities($author));
+        $content = pg_escape_string($content);
 
 
         $table = Story::$table;
         $str = "INSERT INTO $table (name, content, author, fields, password) VALUES ('$name', '$content', '$author', $numfields, '$hash')";
-        $result = mysql_query($str) or die(mysql_error());
+        $result = pg_query($str) or die(mysql_error());
     }
 
     public function delete($password) {
         $table = Story::$table;
         $hash = sha1(sha1($password).$this->name);
-        $name = mysql_real_escape_string($this->name);
+        $name = pg_escape_string($this->name);
         if ($hash == $this->password) {
-            $hash = mysql_real_escape_string($hash);
-            $result = mysql_query("DELETE FROM $table WHERE `name`='$name' AND `password`='$hash'") or die(mysql_error());
+            $hash = pg_escape_string($hash);
+            $result = pg_query("DELETE FROM $table WHERE `name`='$name' AND `password`='$hash'") or die(mysql_error());
             return $result;
         }
         else {

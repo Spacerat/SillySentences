@@ -10,7 +10,7 @@ with your friends without restriction. Try out some of the games people have pos
 on the left, or <a href="/create.php">make your own!</a></p>
 
 <?php
-include_once('./playform.php');
+include_once('playform.php');
 foot();
 
 ?>
