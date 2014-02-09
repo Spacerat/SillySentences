@@ -1,7 +1,6 @@
 <?php
 include_once('model/story.php');
 include_once('word_examples.php');
-db::get_connection();
 $story = null;
 if (isset($_GET['story'])) {
     $story = Story::get_by_urlname($_GET['story']);
